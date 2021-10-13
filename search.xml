@@ -1,6 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>STP生成树协议</title>
+    <url>/2021/10/13/STP%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h1 id="STP简介"><a href="#STP简介" class="headerlink" title="STP简介"></a>STP简介</h1><h2 id="STP概述："><a href="#STP概述：" class="headerlink" title="STP概述："></a>STP概述：</h2><p>​    为了提高可靠性,交换网络中通常会使用冗余链路，从而避免单点故障。然而，冗余链路的存在会带来环路风险，并导致广播风暴以及MAC地址漂移(flap)等问题。生成树协议STP（Spanning Tree Protocal），可以在提高可靠性的同时，避免环路带来的各种问题。</p>
+<p>​    数据链路层协议STP可以破除环路，运行该协议的设备通过交互相关协议报文发现环路，对端口进行有选择的阻塞(Block)，从而将环状网络结构修剪为无环路的树形网络结构。</p>
+<p>STP：Spanning Tree Protocol生成树协议 提供两大功能：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>消除环路</td>
+<td>通过阻断冗余链路来消除网络中可能存在的环路</td>
+</tr>
+<tr>
+<td>链路备份</td>
+<td>当正常工作的链路出现问题，激活备份链路，及时恢复网络连通性</td>
+</tr>
+</tbody></table>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013110528690.png" alt="image-20211013110528690"></p>
+<p>如图连接三个交换机，为了避免环路，STP会自动将一个端口阻塞（sw3的g0/0/1被堵塞）</p>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013110816187.png" alt="image-20211013110816187"></p>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013110849372.png" alt="image-20211013110849372"></p>
+<p>现在将sw1 的g0/0/1shutdown，</p>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013111125950.png" alt="image-20211013111125950"></p>
+<p>为了保持连通性，sw3的g0/0/1会停止阻塞</p>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013111220678.png" alt="image-20211013111220678"></p>
+<p>但是，将sw1 的g0/0/1 undo shutdown 后，sw3的g0/0/1会重新回到堵塞状态，也就是说备胎永远是备胎。</p>
+<h2 id="STP相关概念："><a href="#STP相关概念：" class="headerlink" title="STP相关概念："></a>STP相关概念：</h2><ul>
+<li><p>根桥</p>
+<p>树形网络结构必须有树根，于是STP/RSTP引入了根桥（Root Bridge）概念。</p>
+<p>对于一个STP/RSTP网络，根桥有且只有一个，它是整个网络的逻辑中心，但不一定是物理中心。但是根据网络拓扑的变化，根桥可能改变。</p>
+</li>
+<li><p>BID（Bridge ID）：桥ID   取值范围 0~65535 缺省值32768  是4906的倍数，越小越优先</p>
+<p>IEEE 802.1d标准中规定BID是由2字节的桥优先级（Bridge Priority）与桥MAC地址构成，即BID（8字节） = 桥优先级（2字节） + 桥MAC（6字节）。 </p>
+<p>在STP网络中，桥ID最小的设备会被选举为根桥。在华为公司的设备上，桥优先级支持手工配置。</p>
+</li>
+<li><p>PID（Port ID）：端口ID 0~255 缺省值 128</p>
+<p>PID由两部分构成的，即PID（16位） = 端口优先级（4位） + 端口号（12位）。</p>
+<p>PID只在某些情况下对选择指定端口有作用，即在选择指定端口时，两个端口的根路径开销和发送交换设备BID都相同的情况下，比较端口的PID，PID小者为指定端口。</p>
+</li>
+<li><p>路径开销（RPC）</p>
+<p>路径开销是STP/RSTP协议用于选择链路的参考值。STP/RSTP协议通过计算路径开销，选择较为“强壮”的链路，阻塞多余的链路，将网络修剪成无环路的树形网络结构。根设备的端口的路径开销都为0。</p>
+<p>在一个STP/RSTP网络中，某端口到根桥累计的路径开销就是所经过的各个桥上的各端口的开销。</p>
+</li>
+<li><p>PC（port cost）</p>
+<p>PC的计算需要依据端口带宽来计算。</p>
+</li>
+</ul>
+<h3 id="STP选举过程："><a href="#STP选举过程：" class="headerlink" title="STP选举过程："></a>STP选举过程：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.选举一台根桥  Root</span><br><span class="line">2.选举一个根端口（在非根桥上选举） Root Port  RP</span><br><span class="line">3.选举指定端口 Desinged Port  DP</span><br><span class="line">4.阻塞剩余端口 Alternate Port AP</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 在一个交换网络中选举一个根桥，根桥是设备的概念。</span><br><span class="line">2. 根桥选举后，交换网络中的其他设备都是非根桥，每个非根桥还需选取一个到达根桥最短路径的端口称为根端口。</span><br><span class="line">   注：非根桥只能有一个根端口。</span><br><span class="line">3. 每条链路上，还需选举一个指定端口，默认情况下根桥的所有端口都是指定端口。</span><br><span class="line">4. 既不是根端口，也不是指定端口的其他端口需要被阻塞，不能转发数据帧</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="根桥的选举："><a href="#根桥的选举：" class="headerlink" title="根桥的选举："></a>根桥的选举：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 通过比较BID选举，优选BID小的。BID由优先级+MAC地址组成。</span><br><span class="line">2. 首先比较优先级，优先级越小越优。</span><br><span class="line">3. 如果优先级一样，比较MAC地址，MAC地址越小越优。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="根端口的选举"><a href="#根端口的选举" class="headerlink" title="根端口的选举"></a>根端口的选举</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、比较RPC（Root Path Cost 到达根桥的cost），优选小的。</span><br><span class="line">2、对端BID</span><br><span class="line">3、对端端口ID（PID）最小的</span><br><span class="line">端口ID=端口优先级+端口编号</span><br><span class="line">端口优先级：0-255 默认值：128`</span><br><span class="line">4、本端PID</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="指定端口的选举："><a href="#指定端口的选举：" class="headerlink" title="指定端口的选举："></a>指定端口的选举：</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.比较RPC（Root Path Cost 到达根桥的cost），优选小的。</span><br><span class="line">2.比较端口所在交换机的BID</span><br><span class="line">3.比较PID</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口角色："><a href="#端口角色：" class="headerlink" title="端口角色："></a>端口角色：</h3><ul>
+<li><p>根端口（RP）：</p>
+<p>即去往根桥路径最近的端口。根端口负责向根桥方向转发数据，根端口同时还负责接收上游设备的BPDU报文和用户流量转发。根端口的选择标准是依据根路径开销判定。在一台设备上所有使能STP的端口中，根路径开销最小者，就是根端口。在一个运行STP/RSTP协议的设备上根端口有且只有一个，而且<strong>根桥上没有根端口</strong>。</p>
+</li>
+<li><p>指定端口（DP）：</p>
+<p>对一台交换设备而言，它的指定端口是向下游交换设备转发BPDU报文的端口。<strong>根桥的所有端口都是指定端口</strong>。在环网的每一网段都会选举出一个指定端口，在一个网段上拥有指定端口的交换设备被称作该网段的指定桥。</p>
+</li>
+<li><p>替代端口（AP）：</p>
+<p>由于学习到其它设备发送的配置BPDU报文而阻塞的端口，作为根端口的备份端口，提供了从指定桥到根的另一条可切换路径。</p>
+</li>
+</ul>
+<h3 id="STP端口状态："><a href="#STP端口状态：" class="headerlink" title="STP端口状态："></a>STP端口状态：</h3><table>
+<thead>
+<tr>
+<th align="left">端口状态</th>
+<th align="left">目的</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Forwarding（转发）</td>
+<td align="left">端口既转发用户流量也处理BPDU报文。</td>
+<td align="left">只有根端口或指定端口才能进入Forwarding状态。</td>
+</tr>
+<tr>
+<td align="left">Learning(学习)</td>
+<td align="left">设备会根据收到的用户流量构建MAC地址表，但不转发用户流量。</td>
+<td align="left">过渡状态，增加Learning状态防止临时环路。（15s）</td>
+</tr>
+<tr>
+<td align="left">Listening（监听）</td>
+<td align="left">确定端口角色，将选举出根桥、根端口和指定端口。</td>
+<td align="left">过渡状态。（15s）</td>
+</tr>
+<tr>
+<td align="left">Blocking（阻塞）</td>
+<td align="left">端口紧紧接收并处理BPDU报文，不转发用户流量</td>
+<td align="left">阻塞端口的最终状态。</td>
+</tr>
+<tr>
+<td align="left">Disabled（禁用）</td>
+<td align="left">端口既不处理BPDU报文，也不转发用户流量。</td>
+<td align="left">端口状态为Down。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>端口状态</th>
+<th>接受BPDU</th>
+<th>转发BPDU</th>
+<th>学习MAC</th>
+<th>转发数据</th>
+<th>过渡状态</th>
+<th>稳定状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Disabled</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Blocking</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Listening</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>Forwarding</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<h3 id="三种定时器："><a href="#三种定时器：" class="headerlink" title="三种定时器："></a>三种定时器：</h3><table>
+<thead>
+<tr>
+<th align="left">定时器类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Hello Time</td>
+<td align="left">2s Hello Timer定时器时间的大小控制配置BPDU发送间隔。</td>
+</tr>
+<tr>
+<td align="left">Forward Delay Timer</td>
+<td align="left">15s Forward Delay Timer定时器时间的大小控制端口在Listening和Learning状态的持续时间。</td>
+</tr>
+<tr>
+<td align="left">MSG Age</td>
+<td align="left">当前的年龄，每经过一个设备就加1（从根桥开始为0往下算），最大为Max Age，超过Max Age则丢弃.（不建议接太多设备影响交换机性能）</td>
+</tr>
+<tr>
+<td align="left">Max Age</td>
+<td align="left">20s ，保持阻塞的最大时间（每2秒收到一次，通过比较最后阻塞，若20秒没收到就不再阻塞）</td>
+</tr>
+</tbody></table>
+<h2 id="STP报文："><a href="#STP报文：" class="headerlink" title="STP报文："></a>STP报文：</h2><p>BPDU：Bridge Protocol Data Unit - 桥协议数据单元</p>
+<ul>
+<li>使用组播地址：01-80-C2-00-00-0</li>
+</ul>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013133955770.png" alt="image-20211013133955770"></p>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013134010533.png" alt="image-20211013134010533"></p>
+<p><img src="C:\Users\dyh\AppData\Roaming\Typora\typora-user-images\image-20211013134025732.png" alt="image-20211013134025732"></p>
+<h2 id="报文字段解释："><a href="#报文字段解释：" class="headerlink" title="报文字段解释："></a>报文字段解释：</h2><table>
+<thead>
+<tr>
+<th align="left">字段内容</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Protocol Identifier</td>
+<td align="left">协议ID＝“0”</td>
+</tr>
+<tr>
+<td align="left">Protocol Version Identifier</td>
+<td align="left">协议版本标识符，STP为0，RSTP为2，MSTP为3。</td>
+</tr>
+<tr>
+<td align="left">BPDU Type</td>
+<td align="left">BPDU类型，MSTP为0x02。0x00：STP的Configuration BPDU0x80：STP的TCN BPDU（Topology Change Notification BPDU）0x02：RST BPDU（Rapid Spanning-Tree BPDU）或者MST BPDU（Multiple Spanning-Tree BPDU）</td>
+</tr>
+<tr>
+<td align="left">Flags</td>
+<td align="left">对于“标记域”（Flags），第一个bit（左边、高位bit）表示“TCA（拓扑改变响应）”，最后一个bit（右边、低位bit）表示“TC（拓扑改变）”。</td>
+</tr>
+<tr>
+<td align="left">Root Identifier</td>
+<td align="left">网桥ID都是8个字节——前两个字节是网桥优先级，后6个字节是网桥MAC地址。</td>
+</tr>
+<tr>
+<td align="left">Root Path Cost</td>
+<td align="left">根路径开销，本端口累计到根桥的开销。</td>
+</tr>
+<tr>
+<td align="left">Bridge Identifier</td>
+<td align="left">发送者BID，本交换机的BID。</td>
+</tr>
+<tr>
+<td align="left">Port Identifier</td>
+<td align="left">发送端口PID，发送该BPDU的端口ID。</td>
+</tr>
+<tr>
+<td align="left">Message Age</td>
+<td align="left">该BPDU的消息年龄。</td>
+</tr>
+<tr>
+<td align="left">Max Age</td>
+<td align="left">消息老化年龄。</td>
+</tr>
+<tr>
+<td align="left">Hello Time</td>
+<td align="left">发送两个相邻BPDU间的时间间隔。</td>
+</tr>
+<tr>
+<td align="left">Forward Delay</td>
+<td align="left">控制Listening和Learning状态的持续时间。</td>
+</tr>
+</tbody></table>
+<p>BPDU 类型：</p>
+<ul>
+<li><pre><code>配置BPDU：Configuration
+
+- - 选举根交换机以及确定每个交换机的角色和状态。
+  - 在初始过程中，每个桥都主动发送配置BPDU。
+  - 在网络拓扑稳定后，只有根桥主动发送配置BPDU，其他交换机在收到上游传来的配置BPDU后，才会发送自己的配置BPDU。
+  - 发送周期为Hello Time。
+  - 老化时间为Max Age。
+
+ 拓扑变更通告BPDU：TCN BPDU
+
+- - 下游交换机感知到拓扑变化时向上游发送的拓扑变化通知，用以快速刷新MAC地址表
+</code></pre>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/10/12/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>

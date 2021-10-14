@@ -36,8 +36,13 @@
 <meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211013133955770.png">
 <meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211013134010533.png">
 <meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211013134025732.png">
+<meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102155079.png">
+<meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102432297.png">
+<meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102924846.png">
+<meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014132929247.png">
+<meta property="og:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014132959505.png">
 <meta property="article:published_time" content="2021-10-13T07:34:32.160Z">
-<meta property="article:modified_time" content="2021-10-14T05:40:09.435Z">
+<meta property="article:modified_time" content="2021-10-14T05:46:46.517Z">
 <meta property="article:author" content="2ndOk">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211013110528690.png">
@@ -237,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-14 05:40:09" itemprop="dateModified" datetime="2021-10-14T05:40:09Z">2021-10-14</time>
+                <time title="修改时间：2021-10-14 05:46:46" itemprop="dateModified" datetime="2021-10-14T05:46:46Z">2021-10-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,14 +260,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5k</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
+              <span>8 分钟</span>
             </span>
 
         </div>
@@ -534,30 +539,21 @@
 <td align="left">控制Listening和Learning状态的持续时间。</td>
 </tr>
 </tbody></table>
-<h2 id="BPDU-类型："><a href="#BPDU-类型：" class="headerlink" title="BPDU 类型："></a>BPDU 类型：</h2><ul>
-<li><pre><code>配置BPDU：Configuration
+<h2 id="BPDU-类型："><a href="#BPDU-类型：" class="headerlink" title="BPDU 类型："></a>BPDU 类型：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">配置BPDU：Configuration</span><br><span class="line"></span><br><span class="line"> 选举根交换机以及确定每个交换机的角色和状态。</span><br><span class="line">   在初始过程中，每个桥都主动发送配置BPDU。</span><br><span class="line">   在网络拓扑稳定后，只有根桥主动发送配置BPDU，其他交换机在收到上游传来的配置BPDU后，才会发送自己的配置BPDU。</span><br><span class="line">   发送周期为Hello Time。</span><br><span class="line">   老化时间为Max Age。</span><br><span class="line"> 拓扑变更通告BPDU：TCN BPDU</span><br><span class="line"> 下游交换机感知到拓扑变化时向上游发送的拓扑变化通知，用以快速刷新MAC地址表</span><br></pre></td></tr></table></figure>
 
-- - 选举根交换机以及确定每个交换机的角色和状态。
-  - 在初始过程中，每个桥都主动发送配置BPDU。
-  - 在网络拓扑稳定后，只有根桥主动发送配置BPDU，其他交换机在收到上游传来的配置BPDU后，才会发送自己的配置BPDU。
-  - 发送周期为Hello Time。
-  - 老化时间为Max Age。
 
- 拓扑变更通告BPDU：TCN BPDU
 
-- - 下游交换机感知到拓扑变化时向上游发送的拓扑变化通知，用以快速刷新MAC地址表
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## STP拓扑变更</span><br><span class="line"></span><br><span class="line">### 根桥故障：</span><br><span class="line"></span><br><span class="line">![image-20211014102155079](https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102155079.png)</span><br><span class="line"></span><br><span class="line">非根桥会在BPDU老化之后开始根桥的重新选举，需要50s（20+15+15)</span><br><span class="line"></span><br><span class="line">### 直连链路故障：</span><br><span class="line"></span><br><span class="line">![image-20211014102432297](https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102432297.png)</span><br><span class="line"></span><br><span class="line">SWB检测到直连链路物理故障后，会重新选举新的根端口，经过30s Listerning Learning 各15s</span><br><span class="line"></span><br><span class="line">### 非直连链路故障</span><br><span class="line"></span><br><span class="line">![image-20211014102924846](https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102924846.png)</span><br><span class="line"></span><br><span class="line">​		  非直连链路故障后，SWC的阻塞端口恢复到转发状态大约需要50s （当SWB发生设备故障后，会发出我是根桥的BPDU，SWC收到2个对端发来的BPDU经过比较发现并不是最优的，接收但不会改变该角色，等到老化时间才会改变角色状态）</span><br><span class="line"></span><br><span class="line">### 拓扑改变导致MAC地址表错误</span><br><span class="line"></span><br><span class="line">![image-20211014132929247](https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014132929247.png)</span><br><span class="line"></span><br><span class="line">#### 解决方法</span><br><span class="line"></span><br><span class="line">![image-20211014132959505](https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014132959505.png)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-检测到拓扑变化的交换机通过根端口向根桥发TCN，步骤1
-上游交换机收到TCN后回应TCA，让下游交换机停止发送TCN，步骤2
-再通过根端口发送TCN直到根桥收到，步骤3
-根桥通过指定端口发送TC通知所有下游交换机把MAC地址表的老化时间300秒变成15秒。步骤4，5
-BPDU字段中的Flags中：
-1000 0000最高位为1作为TCA
-0000 0001最低位为1作为TC
-</code></pre>
-</li>
-</ul>
-<h4 id="常用的STP配置"><a href="#常用的STP配置" class="headerlink" title="常用的STP配置"></a>常用的STP配置</h4><table>
+<h2 id="STP拓扑变更"><a href="#STP拓扑变更" class="headerlink" title="STP拓扑变更"></a>STP拓扑变更</h2><h3 id="根桥故障："><a href="#根桥故障：" class="headerlink" title="根桥故障："></a>根桥故障：</h3><p><img src="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102155079.png" alt="image-20211014102155079"></p>
+<p>非根桥会在BPDU老化之后开始根桥的重新选举，需要50s（20+15+15)</p>
+<h3 id="直连链路故障："><a href="#直连链路故障：" class="headerlink" title="直连链路故障："></a>直连链路故障：</h3><p><img src="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102432297.png" alt="image-20211014102432297"></p>
+<p>SWB检测到直连链路物理故障后，会重新选举新的根端口，经过30s Listerning Learning 各15s</p>
+<h3 id="非直连链路故障"><a href="#非直连链路故障" class="headerlink" title="非直连链路故障"></a>非直连链路故障</h3><p><img src="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014102924846.png" alt="image-20211014102924846"></p>
+<p>​          非直连链路故障后，SWC的阻塞端口恢复到转发状态大约需要50s （当SWB发生设备故障后，会发出我是根桥的BPDU，SWC收到2个对端发来的BPDU经过比较发现并不是最优的，接收但不会改变该角色，等到老化时间才会改变角色状态）</p>
+<h3 id="拓扑改变导致MAC地址表错误"><a href="#拓扑改变导致MAC地址表错误" class="headerlink" title="拓扑改变导致MAC地址表错误"></a>拓扑改变导致MAC地址表错误</h3><p><img src="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014132929247.png" alt="image-20211014132929247"></p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p><img src="https://gitee.com/t2ndOk/my-blog-image/raw/master/img/image-20211014132959505.png" alt="image-20211014132959505"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">检测到拓扑变化的交换机通过根端口向根桥发TCN，步骤1</span><br><span class="line">上游交换机收到TCN后回应TCA，让下游交换机停止发送TCN，步骤2</span><br><span class="line">再通过根端口发送TCN直到根桥收到，步骤3</span><br><span class="line">根桥通过指定端口发送TC通知所有下游交换机把MAC地址表的老化时间300秒变成15秒。步骤4，5</span><br><span class="line">BPDU字段中的Flags中：</span><br><span class="line">1000 0000最高位为1作为TCA</span><br><span class="line">0000 0001最低位为1作为TC</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用的STP配置"><a href="#常用的STP配置" class="headerlink" title="常用的STP配置"></a>常用的STP配置</h3><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -678,7 +674,7 @@ BPDU字段中的Flags中：
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STP%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">STP简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E6%A6%82%E8%BF%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">STP概述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">STP相关概念：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STP%E9%80%89%E4%B8%BE%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">STP选举过程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%A1%A5%E7%9A%84%E9%80%89%E4%B8%BE%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">根桥的选举：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%80%89%E4%B8%BE"><span class="nav-number">1.2.3.</span> <span class="nav-text">根端口的选举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%80%89%E4%B8%BE%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">指定端口的选举：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="nav-number">1.2.5.</span> <span class="nav-text">端口角色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STP%E7%AB%AF%E5%8F%A3%E7%8A%B6%E6%80%81%EF%BC%9A"><span class="nav-number">1.2.6.</span> <span class="nav-text">STP端口状态：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%9A"><span class="nav-number">1.2.7.</span> <span class="nav-text">三种定时器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E6%8A%A5%E6%96%87%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">STP报文：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E5%AD%97%E6%AE%B5%E8%A7%A3%E9%87%8A%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">报文字段解释：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BPDU-%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">BPDU 类型：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84STP%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">常用的STP配置</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STP%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">STP简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E6%A6%82%E8%BF%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">STP概述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">STP相关概念：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STP%E9%80%89%E4%B8%BE%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">STP选举过程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%A1%A5%E7%9A%84%E9%80%89%E4%B8%BE%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">根桥的选举：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%80%89%E4%B8%BE"><span class="nav-number">1.2.3.</span> <span class="nav-text">根端口的选举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%80%89%E4%B8%BE%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">指定端口的选举：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="nav-number">1.2.5.</span> <span class="nav-text">端口角色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STP%E7%AB%AF%E5%8F%A3%E7%8A%B6%E6%80%81%EF%BC%9A"><span class="nav-number">1.2.6.</span> <span class="nav-text">STP端口状态：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%9A"><span class="nav-number">1.2.7.</span> <span class="nav-text">三种定时器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E6%8A%A5%E6%96%87%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">STP报文：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E5%AD%97%E6%AE%B5%E8%A7%A3%E9%87%8A%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">报文字段解释：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BPDU-%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">BPDU 类型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP%E6%8B%93%E6%89%91%E5%8F%98%E6%9B%B4"><span class="nav-number">1.6.</span> <span class="nav-text">STP拓扑变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%A1%A5%E6%95%85%E9%9A%9C%EF%BC%9A"><span class="nav-number">1.6.1.</span> <span class="nav-text">根桥故障：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E8%BF%9E%E9%93%BE%E8%B7%AF%E6%95%85%E9%9A%9C%EF%BC%9A"><span class="nav-number">1.6.2.</span> <span class="nav-text">直连链路故障：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E7%9B%B4%E8%BF%9E%E9%93%BE%E8%B7%AF%E6%95%85%E9%9A%9C"><span class="nav-number">1.6.3.</span> <span class="nav-text">非直连链路故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%94%B9%E5%8F%98%E5%AF%BC%E8%87%B4MAC%E5%9C%B0%E5%9D%80%E8%A1%A8%E9%94%99%E8%AF%AF"><span class="nav-number">1.6.4.</span> <span class="nav-text">拓扑改变导致MAC地址表错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84STP%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.5.</span> <span class="nav-text">常用的STP配置</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
